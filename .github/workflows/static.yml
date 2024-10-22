@@ -3,7 +3,7 @@ name: Deploy Hugo site to GitHub Pages
 on:
   push:
     branches:
-      - main  # Ganti jika branch utama Anda berbeda
+      - main  # Ganti dengan branch utama Anda jika berbeda
 
 jobs:
   build:
@@ -14,9 +14,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up Hugo
-        uses: peaceiris/hugo-action@v2.10.0
+        uses: jakejarvis/hugo-actions@v0.1.0
         with:
-          hugo-version: 'latest'
+          hugo_version: 'latest'
 
       - name: Build
         run: hugo --minify
