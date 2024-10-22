@@ -25,15 +25,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Hugo
-        uses: docker://goharbor/registry:latest
-        with:
-          args: |
-            hugo --minify
+      - name: Install Hugo
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y hugo
 
       - name: Build the site
-        run: |
-          docker run --rm -v ${{ github.workspace }}:/src -w /src klakegg/hugo:latest hugo -D
+        run: hugo --minify
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
