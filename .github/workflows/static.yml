@@ -31,7 +31,9 @@ jobs:
           sudo apt-get install -y hugo
 
       - name: Build the site
-        run: hugo --minify
+        run: |
+          cd ./your-hugo-site-folder  # Ganti dengan folder proyek Hugo Anda
+          hugo --minify
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -39,7 +41,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './public'  # Mengupload folder public
+          path: './your-hugo-site-folder/public'  # Ganti dengan folder proyek Hugo Anda
 
       - name: Deploy to GitHub Pages
         id: deployment
