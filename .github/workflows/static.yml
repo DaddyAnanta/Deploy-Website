@@ -23,15 +23,17 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
       - name: Set up Hugo
-        uses: peaceiris/hugo-action@v2.10.0
+        uses: docker://goharbor/registry:latest
         with:
-          hugo_version: 'latest'
+          args: |
+            hugo --minify
 
       - name: Build the site
-        run: hugo --minify
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/src -w /src klakegg/hugo:latest hugo -D
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -39,7 +41,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './public'  # Pastikan kita meng-upload konten di folder public
+          path: './public'  # Mengupload folder public
 
       - name: Deploy to GitHub Pages
         id: deployment
